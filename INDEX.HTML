@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painéis Públicos – Agricultura & Balança Comercial</title>
+  <style>
+    :root{
+      --brand:#126e3a;         /* verde prefeitura */
+      --brand-2:#0a4b28;
+      --bg:#f6f3ea;            /* bege claro */
+      --tab-bg:#ffffff;
+      --tab-text:#333;
+      --tab-active:#126e3a;
+      --radius:14px;
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+      background:var(--bg); color:#222;
+    }
+    .wrap{
+      max-width: 1200px; margin: 24px auto; padding: 0 16px;
+    }
+    header{
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));
+      color:#fff; padding:18px 20px; border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0,0,0,.10);
+    }
+    header h1{margin:0;font-size:clamp(18px,3.2vw,26px); letter-spacing:.2px}
+    header p{margin:6px 0 0; opacity:.9}
+
+    /* Abas */
+    .tabs{margin:18px 0 0}
+    .tab-bar{
+      display:flex; gap:8px; flex-wrap:wrap;
+      background:transparent; padding:8px 0;
+    }
+    .tab-bar button{
+      appearance:none; border:1px solid #d9d9d9; background:var(--tab-bg);
+      color:var(--tab-text); padding:10px 14px; border-radius:10px;
+      cursor:pointer; font-weight:600;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      transition:.2s;
+    }
+    .tab-bar button:hover{transform:translateY(-1px)}
+    .tab-bar button.active{
+      background:#e9f6ef; border-color:var(--tab-active); color:var(--tab-active);
+      box-shadow: 0 6px 18px rgba(18,110,58,.18);
+    }
+
+    /* Área de iframe responsivo (16:9) */
+    .view{
+      background:#fff; border:1px solid #ece8dd; border-radius: var(--radius);
+      padding:12px; margin-top:10px; box-shadow: 0 6px 20px rgba(0,0,0,.06);
+    }
+    .frame-wrap{
+      position:relative; width:100%; aspect-ratio: 16 / 9; /* responsivo */
+      border-radius: 10px; overflow:hidden;
+      background:#fafafa;
+    }
+    .frame-wrap iframe{
+      position:absolute; inset:0; width:100%; height:100%; border:0;
+    }
+
+    footer{margin:18px 0; color:#555; font-size:13px}
+    footer a{color:var(--brand-2); text-decoration:none}
+    footer a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>PAINÉIS PÚBLICOS – Município de Rio Verde (GO)</h1>
+      <p>Use as abas abaixo para alternar entre <b>Agricultura</b> e <b>Balança Comercial</b>.</p>
+    </header>
+
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="active" data-tab="agro">Agricultura</button>
+        <button data-tab="comex">Balança Comercial</button>
+      </div>
+
+      <div class="view">
+        <!-- Conteúdo das abas -->
+        <div class="panel" id="agro" style="display:block">
+          <div class="frame-wrap">
+            <iframe title="Agricultura"
+              src="https://app.powerbi.com/view?r=eyJrIjoiYTEwNGY3ZjktNGMzOS00YjU2LWE4ZDctMjEyOTRmZWMzNDY4IiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
+              allowfullscreen="true"></iframe>
+          </div>
+        </div>
+
+        <div class="panel" id="comex" style="display:none">
+          <div class="frame-wrap">
+            <iframe title="Export_Import"
+              src="https://app.powerbi.com/view?r=eyJrIjoiOTA1MGI5YTYtODc4OS00MDlhLWEzMGYtNzBmZmNjMDE3OGEwIiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
+              allowfullscreen="true"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Atualizado automaticamente quando você republicar os relatórios no Power BI.
+      • Dúvidas? Fale com <a href="mailto:seuemail@dominio.com">a equipe</a>.
+    </footer>
+  </div>
+
+  <script>
+    // Alternância simples de abas
+    const buttons = document.querySelectorAll('.tab-bar button');
+    const panels  = document.querySelectorAll('.panel');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        panels.forEach(p => p.style.display = (p.id === btn.dataset.tab) ? 'block' : 'none');
+      });
+    });
+  </script>
+</body>
+</html>
