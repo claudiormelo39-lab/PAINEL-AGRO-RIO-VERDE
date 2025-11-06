@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PAINÉIS PÚBLICOS — PRODUÇÃO AGRÍCOLA & BALANÇA COMERCIAL</title>
+  <title>PAINÉIS PÚBLICOS — PRODUÇÃO AGRÍCOLA, PECUÁRIA & BALANÇA COMERCIAL</title>
   <style>
     :root {
       --verde: #116530;
@@ -12,7 +12,6 @@
       --cinza: #e6e6e6;
     }
 
-    /* ===== Fundo com imagem (cobrindo a tela toda) ===== */
     html, body {
       height: 100%;
     }
@@ -20,12 +19,10 @@
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: #222;
-
-      /* Imagem de fundo no repositório (raiz). Ajuste o nome se necessário. */
       background:
-        linear-gradient(0deg, rgba(255,255,255,.86), rgba(255,255,255,.86)), /* véu para leitura */
+        linear-gradient(0deg, rgba(255,255,255,.86), rgba(255,255,255,.86)),
         url("./IMG_5930.jpg?v=1") center / cover no-repeat fixed,
-        var(--areia); /* fallback */
+        var(--areia);
     }
 
     header {
@@ -37,34 +34,57 @@
     }
 
     .tabs {
-      display: flex; gap: 6px; padding: 10px 12px;
-      background: #fff; border-bottom: 1px solid var(--cinza);
-      position: sticky; top: 0; z-index: 5;
+      display: flex;
+      gap: 6px;
+      padding: 10px 12px;
+      background: #fff;
+      border-bottom: 1px solid var(--cinza);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      flex-wrap: wrap;
     }
+
     .tab {
       border: 1px solid var(--cinza);
-      background: #fff; color: #333;
-      padding: 8px 14px; border-radius: 8px;
-      cursor: pointer; font-weight: 600;
+      background: #fff;
+      color: #333;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease-in-out;
+    }
+    .tab:hover {
+      background: var(--areia);
     }
     .tab[aria-selected="true"] {
-      background: var(--verde); color: #fff; border-color: var(--verde-escuro);
+      background: var(--verde);
+      color: #fff;
+      border-color: var(--verde-escuro);
     }
 
     .panel {
       display: none;
-      height: calc(100vh - 120px); /* cabeçalho + abas */
+      height: calc(100vh - 120px);
       padding: 0;
     }
-    .panel.active { display: block; }
+    .panel.active {
+      display: block;
+    }
 
-    /* iFrame ocupa todo o painel e herda fundo translúcido */
     .panel iframe {
-      width: 100%; height: 100%; border: 0; background: transparent;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
     }
 
     footer {
-      text-align: center; font-size: 12px; color: #666; padding: 10px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      padding: 10px;
     }
 
     @media (max-width: 640px) {
@@ -73,11 +93,12 @@
   </style>
 </head>
 <body>
-  <header>PAINÉIS PÚBLICOS — PRODUÇÃO AGRÍCOLA & BALANÇA COMERCIAL</header>
+  <header>PAINÉIS PÚBLICOS — PRODUÇÃO AGRÍCOLA, PECUÁRIA & BALANÇA COMERCIAL</header>
 
   <!-- Abas -->
   <nav class="tabs" role="tablist" aria-label="Relatórios públicos">
     <button class="tab" role="tab" id="tab-agro" aria-controls="panel-agro" aria-selected="true">PRODUÇÃO AGRÍCOLA</button>
+    <button class="tab" role="tab" id="tab-pecuaria" aria-controls="panel-pecuaria" aria-selected="false">PRODUÇÃO PECUÁRIA</button>
     <button class="tab" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="false">BALANÇA COMERCIAL</button>
   </nav>
 
@@ -90,7 +111,16 @@
     </iframe>
   </section>
 
-  <!-- Painel 2: EXPORT_IMPORT -->
+  <!-- Painel 2: PECUÁRIA -->
+  <section id="panel-pecuaria" class="panel" role="tabpanel" aria-labelledby="tab-pecuaria">
+    <iframe
+      title="Pecuária"
+      src="https://app.powerbi.com/view?r=eyJrIjoiZjJhNTZkNTUtNWNmZS00ZTZlLWI1MWMtNGFiYzhjNDU1OGQ2IiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
+      allowfullscreen="true">
+    </iframe>
+  </section>
+
+  <!-- Painel 3: BALANÇA COMERCIAL -->
   <section id="panel-exp" class="panel" role="tabpanel" aria-labelledby="tab-exp">
     <iframe
       title="Export_Import"
@@ -111,15 +141,17 @@
     }
 
     document.getElementById('tab-agro').addEventListener('click', () => activate('agro'));
+    document.getElementById('tab-pecuaria').addEventListener('click', () => activate('pecuaria'));
     document.getElementById('tab-exp').addEventListener('click', () => activate('exp'));
 
     window.addEventListener('hashchange', () => {
       const h = location.hash.replace('#','');
-      if (h === 'exp' || h === 'agro') activate(h);
+      if (['agro','pecuaria','exp'].includes(h)) activate(h);
     });
+
     (function initFromHash(){
       const h = location.hash.replace('#','');
-      if (h === 'exp' || h === 'agro') activate(h);
+      if (['agro','pecuaria','exp'].includes(h)) activate(h);
     })();
   </script>
 </body>
