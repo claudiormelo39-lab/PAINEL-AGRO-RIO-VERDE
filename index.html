@@ -97,13 +97,25 @@
 
   <!-- Abas -->
   <nav class="tabs" role="tablist" aria-label="Relatórios públicos">
-    <button class="tab" role="tab" id="tab-agro" aria-controls="panel-agro" aria-selected="true">PRODUÇÃO AGRÍCOLA</button>
+    <!-- 1) BALANÇA COMERCIAL -->
+    <button class="tab" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="true">BALANÇA COMERCIAL</button>
+    <!-- 2) PRODUÇÃO AGRÍCOLA -->
+    <button class="tab" role="tab" id="tab-agro" aria-controls="panel-agro" aria-selected="false">PRODUÇÃO AGRÍCOLA</button>
+    <!-- 3) PRODUÇÃO PECUÁRIA -->
     <button class="tab" role="tab" id="tab-pecuaria" aria-controls="panel-pecuaria" aria-selected="false">PRODUÇÃO PECUÁRIA</button>
-    <button class="tab" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="false">BALANÇA COMERCIAL</button>
   </nav>
 
-  <!-- Painel 1: AGRICULTURA -->
-  <section id="panel-agro" class="panel active" role="tabpanel" aria-labelledby="tab-agro">
+  <!-- Painel 1: BALANÇA COMERCIAL (agora é o painel inicial) -->
+  <section id="panel-exp" class="panel active" role="tabpanel" aria-labelledby="tab-exp">
+    <iframe
+      title="Export_Import"
+      src="https://app.powerbi.com/view?r=eyJrIjoiOTA1MGI5YTYtODc4OS00MDlhLWEzMGYtNzBmZmNjMDE3OGEwIiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
+      allowfullscreen="true">
+    </iframe>
+  </section>
+
+  <!-- Painel 2: AGRICULTURA -->
+  <section id="panel-agro" class="panel" role="tabpanel" aria-labelledby="tab-agro">
     <iframe
       title="Agricultura"
       src="https://app.powerbi.com/view?r=eyJrIjoiNWFjMDYwYTEtYmM5Zi00NWViLWJlNzgtMjc1ZDcwZjdmMGU1IiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
@@ -111,20 +123,11 @@
     </iframe>
   </section>
 
-  <!-- Painel 2: PECUÁRIA -->
+  <!-- Painel 3: PECUÁRIA -->
   <section id="panel-pecuaria" class="panel" role="tabpanel" aria-labelledby="tab-pecuaria">
     <iframe
       title="Pecuária"
       src="https://app.powerbi.com/view?r=eyJrIjoiZjJhNTZkNTUtNWNmZS00ZTZlLWI1MWMtNGFiYzhjNDU1OGQ2IiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
-      allowfullscreen="true">
-    </iframe>
-  </section>
-
-  <!-- Painel 3: BALANÇA COMERCIAL -->
-  <section id="panel-exp" class="panel" role="tabpanel" aria-labelledby="tab-exp">
-    <iframe
-      title="Export_Import"
-      src="https://app.powerbi.com/view?r=eyJrIjoiOTA1MGI5YTYtODc4OS00MDlhLWEzMGYtNzBmZmNjMDE3OGEwIiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
       allowfullscreen="true">
     </iframe>
   </section>
