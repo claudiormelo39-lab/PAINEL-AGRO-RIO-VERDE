@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PAINÉIS PÚBLICOS — BALANÇA COMERCIAL, PRODUÇÃO AGRÍCOLA & PECUÁRIA</title>
+  <title>PAINÉIS PÚBLICOS — BALANÇA COMERCIAL, PRODUÇÃO AGRÍCOLA, PECUÁRIA & PRODUÇÃO DA EXTRAÇÃO VEGETAL E DA SILVICULTURA</title>
   <style>
     :root {
       --verde: #116530;
@@ -93,19 +93,29 @@
   </style>
 </head>
 <body>
-  <header>PAINÉIS PÚBLICOS — BALANÇA COMERCIAL, PRODUÇÃO AGRÍCOLA & PECUÁRIA</header>
+  <header>PAINÉIS PÚBLICOS — BALANÇA COMERCIAL, PRODUÇÃO AGRÍCOLA, PECUÁRIA & PRODUÇÃO DA EXTRAÇÃO VEGETAL E DA SILVICULTURA</header>
 
   <!-- Abas -->
   <nav class="tabs" role="tablist" aria-label="Relatórios públicos">
     <!-- 1) BALANÇA COMERCIAL -->
-    <button class="tab" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="true">BALANÇA COMERCIAL</button>
+    <button class="tab" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="true">
+      BALANÇA COMERCIAL
+    </button>
     <!-- 2) PRODUÇÃO AGRÍCOLA -->
-    <button class="tab" role="tab" id="tab-agro" aria-controls="panel-agro" aria-selected="false">PRODUÇÃO AGRÍCOLA</button>
+    <button class="tab" role="tab" id="tab-agro" aria-controls="panel-agro" aria-selected="false">
+      PRODUÇÃO AGRÍCOLA
+    </button>
     <!-- 3) PRODUÇÃO PECUÁRIA -->
-    <button class="tab" role="tab" id="tab-pecuaria" aria-controls="panel-pecuaria" aria-selected="false">PRODUÇÃO PECUÁRIA</button>
+    <button class="tab" role="tab" id="tab-pecuaria" aria-controls="panel-pecuaria" aria-selected="false">
+      PRODUÇÃO PECUÁRIA
+    </button>
+    <!-- 4) PEVS -->
+    <button class="tab" role="tab" id="tab-pevs" aria-controls="panel-pevs" aria-selected="false">
+      EXTRAÇÃO VEGETAL &amp; SILVICULTURA
+    </button>
   </nav>
 
-  <!-- Painel 1: BALANÇA COMERCIAL (agora é o painel inicial) -->
+  <!-- Painel 1: BALANÇA COMERCIAL (painel inicial) -->
   <section id="panel-exp" class="panel active" role="tabpanel" aria-labelledby="tab-exp">
     <iframe
       title="Export_Import"
@@ -132,6 +142,15 @@
     </iframe>
   </section>
 
+  <!-- Painel 4: PEVS – Extração Vegetal & Silvicultura -->
+  <section id="panel-pevs" class="panel" role="tabpanel" aria-labelledby="tab-pevs">
+    <iframe
+      title="Extração Vegetal_Silvicultura"
+      src="https://app.powerbi.com/view?r=eyJrIjoiNjBjYzE0MzUtZmIxNy00MmIyLTliYzktNzE4ZjA0ZTlmMWM3IiwidCI6ImVjMzI3NDZkLWJhNDUtNDI5My1hNzM2LTk3YTdlNjNkM2I3MCJ9"
+      allowfullscreen="true">
+    </iframe>
+  </section>
+
   <footer>Fonte: Power BI • Publicar na Web</footer>
 
   <script>
@@ -139,25 +158,28 @@
     const panels = document.querySelectorAll('.panel');
 
     function activate(id) {
-      tabs.forEach(t => t.setAttribute('aria-selected', String(t.id === 'tab-' + id)));
-      panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
+      tabs.forEach(t =>
+        t.setAttribute('aria-selected', String(t.id === 'tab-' + id))
+      );
+      panels.forEach(p =>
+        p.classList.toggle('active', p.id === 'panel-' + id)
+      );
     }
 
     document.getElementById('tab-agro').addEventListener('click', () => activate('agro'));
     document.getElementById('tab-pecuaria').addEventListener('click', () => activate('pecuaria'));
     document.getElementById('tab-exp').addEventListener('click', () => activate('exp'));
+    document.getElementById('tab-pevs').addEventListener('click', () => activate('pevs'));
 
     window.addEventListener('hashchange', () => {
       const h = location.hash.replace('#','');
-      if (['agro','pecuaria','exp'].includes(h)) activate(h);
+      if (['agro','pecuaria','exp','pevs'].includes(h)) activate(h);
     });
 
     (function initFromHash(){
       const h = location.hash.replace('#','');
-      if (['agro','pecuaria','exp'].includes(h)) activate(h);
+      if (['agro','pecuaria','exp','pevs'].includes(h)) activate(h);
     })();
   </script>
 </body>
 </html>
-
-
